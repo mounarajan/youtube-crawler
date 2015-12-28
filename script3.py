@@ -1014,6 +1014,6 @@ def dedupUrls3():
 #dedupUrls4()
 #get_data()
 #dedupUrls3()
-links_extract("https://www.googleapis.com/youtube/v3/search?part=snippet&publishedAfter=2014-12-28T00%3A00%3A00Z&type=video&key=AIzaSyAnimLnprBHU5BVrd_61ynch4x5gPzrsPA")
-get_data()
-    
+#links_extract("https://www.googleapis.com/youtube/v3/search?part=snippet&publishedAfter=2014-12-28T00%3A00%3A00Z&type=video&key=AIzaSyAnimLnprBHU5BVrd_61ynch4x5gPzrsPA")
+#get_data()
+get_urls1()
