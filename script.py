@@ -18,6 +18,101 @@ def urlLib(url):
     headers = {'User-Agent': user_agent}
     data = requests.get(url,headers = headers)
     return data.text.encode('utf-8')
+
+
+def youtube_again(url,url1):
+    f2 = open('main-urls.txt','a')
+    f3 = open('main-urls1.txt','a')
+    url = re.sub(r"[\s\n]*","",url)
+    #url = re.sub(r'\&','\&',url)
+    print url
+    data = urlLib(url)
+    data = str(data)
+
+    if re.search(r'(?mis)channelId\"\:\s\"([^\"]*)\"',data):
+        links = re.findall(r'(?mis)channelId\"\:\s\"([^\"]*)\"',data)
+        for link in links:
+            if re.search(r'^htt',link):
+                f2.write(link+"\n")
+                print (link+"\n")
+            elif re.search(r'\w',link):
+                link = re.sub(r'^','http://youtube.com/channel/',link)
+                link = re.sub(r'(.*?channel\/.*)',r'\1/about',link)
+                link = re.sub(r'amp\;',r'',link)
+                f2.write(link+"\n")
+                print (link+"\n")
+                #data_extract(link)
+
+        if re.search(r'(?mis)videoId\"\:\s\"([^\"]*)\"',data):
+            links = re.findall(r'(?mis)videoId\"\:\s\"([^\"]*)\"',data)
+            for link in links:
+                if re.search(r'^htt',link):
+                    f3.write(link+"\n")
+                    print (link+"\n")
+                elif re.search(r'\w',link):
+                    link = re.sub(r'^','https://www.youtube.com/watch\?v=',link)
+              
+                    link = re.sub(r'amp\;',r'',link)
+                    f3.write(link+"\n")
+                    print (link+"\n")
+                    #deatilsExtract(link)
+        if re.search(r'(?mis)&pageToken=\w+',url1):
+            url1 = re.sub(r'&publishedAfter=[^\&]*','',url1)
+            url1 = re.sub(r'&pageToken=\w+',r'',url1)
+        if re.search(r'(?mis)nextPageToken\"\:\s\"([^\"]*)\"',data):
+            links = re.findall(r'(?mis)nextPageToken\"\:\s\"([^\"]*)\"',data)[0]
+            url1 = re.sub(r'&publishedAfter=[^\&]*','',url1)
+            url1 = url1+"&pageToken={0}".format(links)
+            print (url1)
+            links_extract1(url1)
+
+def links_extract1(url):
+    f2 = open('main-urls.txt','a')
+    f3 = open('main-urls1.txt','a')
+    url = re.sub(r"[\s\n]*","",url)
+    #url = re.sub(r'\&','\&',url)
+    print url
+    data = urlLib(url)
+    data = str(data)
+
+    if re.search(r'(?mis)channelId\"\:\s\"([^\"]*)\"',data):
+        links = re.findall(r'(?mis)channelId\"\:\s\"([^\"]*)\"',data)
+        for link in links:
+            if re.search(r'^htt',link):
+                f2.write(link+"\n")
+                print (link+"\n")
+            elif re.search(r'\w',link):
+                link = re.sub(r'^','http://youtube.com/channel/',link)
+                link = re.sub(r'(.*?channel\/.*)',r'\1/about',link)
+                link = re.sub(r'amp\;',r'',link)
+                f2.write(link+"\n")
+                print (link+"\n")
+                #data_extract(link)
+
+        if re.search(r'(?mis)videoId\"\:\s\"([^\"]*)\"',data):
+            links = re.findall(r'(?mis)videoId\"\:\s\"([^\"]*)\"',data)
+            for link in links:
+                if re.search(r'^htt',link):
+                    f3.write(link+"\n")
+                    print (link+"\n")
+                elif re.search(r'\w',link):
+                    link = re.sub(r'^','https://www.youtube.com/watch\?v=',link)
+              
+                    link = re.sub(r'amp\;',r'',link)
+                    f3.write(link+"\n")
+                    print (link+"\n")
+                    #deatilsExtract(link)
+        if re.search(r'(?mis)&pageToken=\w+',url):
+            url = re.sub(r'&publishedAfter=[^\&]*','',url)
+            url = re.sub(r'&pageToken=\w+',r'',url)
+        if re.search(r'(?mis)nextPageToken\"\:\s\"([^\"]*)\"',data):
+            links = re.findall(r'(?mis)nextPageToken\"\:\s\"([^\"]*)\"',data)[0]
+            url = re.sub(r'&publishedAfter=[^\&]*','',url)
+            url = url+"&pageToken={0}".format(links)
+            print (url)
+            links_extract1(url)
+
+
        
     
 
@@ -57,6 +152,13 @@ def links_extract(url):
                     f3.write(link+"\n")
                     print (link+"\n")
                     #deatilsExtract(link)
+
+        if re.search(r'(?mis)publishedAt\"\:\s\"([^\"]*)T[^\"]*\"',data):
+            links = re.findall(r'(?mis)publishedAt\"\:\s\"([^\"]*)T[^\"]*\"',data)
+            for link in links:
+                url_li = "https://www.googleapis.com/youtube/v3/search?part=snippet&publishedBefore={0}T00%3A00%3A00Z&type=video&key=AIzaSyAnimLnprBHU5BVrd_61ynch4x5gPzrsPA".format(link)
+                youtube_again(url_li,url)
+                
         if re.search(r'(?mis)&pageToken=\w+',url):
             url = re.sub(r'&publishedAfter=[^\&]*','',url)
             url = re.sub(r'&pageToken=\w+',r'',url)
@@ -1015,5 +1117,5 @@ def dedupUrls3():
 #get_data()
 #dedupUrls3()
 links_extract("https://www.googleapis.com/youtube/v3/search?part=snippet&publishedAfter=2014-12-28T00%3A00%3A00Z&type=video&key=AIzaSyAnimLnprBHU5BVrd_61ynch4x5gPzrsPA")
-get_data()
+#get_data()
     
