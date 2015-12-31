@@ -16,7 +16,7 @@ def urlLib(url):
     
     user_agent = 'Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0'
     headers = {'User-Agent': user_agent}
-    data = requests.get(url,headers = headers,verify=True)
+    data = requests.get(url,headers = headers,verify=False)
     return data.text.encode('utf-8')
 
 
@@ -65,6 +65,9 @@ def youtube_again(url,url1):
             url1 = url1+"&pageToken={0}".format(links)
             print (url1)
             links_extract1(url1)
+
+    f2.close()
+    f3.close()
 
 def links_extract1(url):
     f2 = open('main-urls.txt','a')
@@ -118,6 +121,9 @@ def links_extract1(url):
             url = url+"&pageToken={0}".format(links)
             print (url)
             links_extract1(url)
+
+    f2.close()
+    f3.close()
 
 
        
@@ -175,6 +181,9 @@ def links_extract(url):
             url = url+"&pageToken={0}".format(links)
             print (url)
             links_extract(url)
+
+    f2.close()
+    f3.close()
 
 
 def get_data():
