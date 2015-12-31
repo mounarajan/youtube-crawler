@@ -21,8 +21,8 @@ def urlLib(url):
 
 
 def youtube_again(url,url1):
-    f2 = open('main-urls.txt','a')
-    f3 = open('main-urls1.txt','a')
+    f2 = open('main-urls2.txt','a')
+    f3 = open('main-urls12.txt','a')
     url = re.sub(r"[\s\n]*","",url)
     #url = re.sub(r'\&','\&',url)
     print url
@@ -70,8 +70,8 @@ def youtube_again(url,url1):
     f3.close()
 
 def links_extract1(url):
-    f2 = open('main-urls.txt','a')
-    f3 = open('main-urls1.txt','a')
+    f2 = open('main-urls3.txt','a')
+    f3 = open('main-urls13.txt','a')
     url = re.sub(r"[\s\n]*","",url)
     #url = re.sub(r'\&','\&',url)
     print url
