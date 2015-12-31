@@ -77,7 +77,7 @@ def get_data():
     ParsedURLS = ParsePool.map(data_extract,f2)
 
 def get_urls1():
-    f2 = open('main-urls.txt1','r')
+    f2 = open('main-urls1.txt','r')
 
     nprocs = 50 # nprocs is the number of processes to run
     ParsePool = Pool(nprocs)

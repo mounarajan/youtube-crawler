@@ -195,7 +195,7 @@ def get_data():
     ParsedURLS = ParsePool.map(data_extract,f2)
 
 def get_urls1():
-    f2 = open('main-urls.txt1','r')
+    f2 = open('main-urls.txt','r')
 
     nprocs = 50 # nprocs is the number of processes to run
     ParsePool = Pool(nprocs)
@@ -1132,6 +1132,6 @@ def dedupUrls3():
 #dedupUrls4()
 #get_data()
 #dedupUrls3()
-links_extract("https://www.googleapis.com/youtube/v3/search?part=snippet&publishedAfter=2014-12-28T00%3A00%3A00Z&type=video&key=AIzaSyAnimLnprBHU5BVrd_61ynch4x5gPzrsPA")
-#get_data()
+#links_extract("https://www.googleapis.com/youtube/v3/search?part=snippet&publishedAfter=2014-12-28T00%3A00%3A00Z&type=video&key=AIzaSyAnimLnprBHU5BVrd_61ynch4x5gPzrsPA")
+get_data()
     
