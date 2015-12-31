@@ -16,7 +16,7 @@ def urlLib(url):
     
     user_agent = 'Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0'
     headers = {'User-Agent': user_agent}
-    data = requests.get(url,headers = headers)
+    data = requests.get(url,headers = headers,verify=True)
     return data.text.encode('utf-8')
 
 
@@ -108,7 +108,7 @@ def links_extract1(url):
             for link in links:
                 url_li = "https://www.googleapis.com/youtube/v3/search?part=snippet&publishedBefore={0}T00%3A00%3A00Z&type=video&key=AIzaSyAnimLnprBHU5BVrd_61ynch4x5gPzrsPA".format(link)
                 youtube_again(url_li,url)
-                
+
         if re.search(r'(?mis)&pageToken=\w+',url):
             url = re.sub(r'&publishedAfter=[^\&]*','',url)
             url = re.sub(r'&pageToken=\w+',r'',url)
