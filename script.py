@@ -102,6 +102,13 @@ def links_extract1(url):
                     f3.write(link+"\n")
                     print (link+"\n")
                     #deatilsExtract(link)
+
+        if re.search(r'(?mis)publishedAt\"\:\s\"([^\"]*)T[^\"]*\"',data):
+            links = re.findall(r'(?mis)publishedAt\"\:\s\"([^\"]*)T[^\"]*\"',data)
+            for link in links:
+                url_li = "https://www.googleapis.com/youtube/v3/search?part=snippet&publishedBefore={0}T00%3A00%3A00Z&type=video&key=AIzaSyAnimLnprBHU5BVrd_61ynch4x5gPzrsPA".format(link)
+                youtube_again(url_li,url)
+                
         if re.search(r'(?mis)&pageToken=\w+',url):
             url = re.sub(r'&publishedAfter=[^\&]*','',url)
             url = re.sub(r'&pageToken=\w+',r'',url)
